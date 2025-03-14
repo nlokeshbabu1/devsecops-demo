@@ -1,4 +1,4 @@
-FROM node:20-alpine3.21 as build
+FROM node:23-alpine3.21 as build
 RUN apk update && apk upgrade libxml2
 WORKDIR /app
 COPY package*.json ./
@@ -7,7 +7,7 @@ COPY . .
 RUN npm run build
 
 #production environment
-FROM nginx:1.21-alpine
+FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
