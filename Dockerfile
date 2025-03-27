@@ -1,6 +1,7 @@
 FROM node:23-alpine3.21 as build
 WORKDIR /app
 COPY package*.json ./
+RUN apk update
 RUN npm ci
 COPY . .
 RUN npm run build
